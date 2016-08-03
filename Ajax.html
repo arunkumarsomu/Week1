@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo"><h2>Let AJAX change this text</h2></div>
+
+<button type="button" onclick="loadDoc()">Change Content</button>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+		  //document.getElementById("demo").innerHTML = xhttp.responseText;
+		  
+		  var obj = JSON.parse(xhttp.responseText);
+		 // document.getElementById("demo").innerHTML = obj.Title + " " + obj.Year + " " + obj.Released ;
+		document.getElementById('title').innerHTML = obj.Title;
+		document.getElementById('Year').innerHTML = obj.Year;
+		document.getElementById('Rated').innerHTML = obj.Rated;
+		document.getElementById('Released').innerHTML = obj.Released;
+		
+		var newUL = document.createElement('ul');
+			 document.body.appendChild(newUL);
+		 
+			for ( var key in obj)
+			{
+				 if ( obj.hasOwnProperty(key))
+				 {
+				//	var newElement = document.createElement('ul');
+				//	 document.body.appendChild(newElement);
+					var val = obj[key];
+					var newElement = document.createElement('li');
+					newElement.innerHTML = val;
+					newUL.appendChild(newElement);
+				 }
+			 
+			 }
+		}
+	
+    
+  };
+  xhttp.open("GET", 'http://www.omdbapi.com/?t=batman&y=&plot=short&r=json', true);
+  xhttp.send();
+}
+</script>
+
+<ul>
+  <li 	id="title"> </li>
+   <li id="Year" ></li>
+    <li id="Rated" > </li>
+	 <li id="Released" > </li>
+	 </ul>
+  
+</body>
+</html>

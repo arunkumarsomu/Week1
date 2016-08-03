@@ -1,0 +1,10 @@
+
+
+function domPrompt(msg){
+	var newElement = document.createElement("div");
+	document.body.appendChild(newElement)
+	document.body.appendChild(msg)
+	var newElement = document.createElement("/div");
+}
+
+function domAlert(msg)
